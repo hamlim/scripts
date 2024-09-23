@@ -22,6 +22,5 @@ if (!vaultPath) {
   Deno.exit(1);
 }
 
-countNotesInVault(vaultPath).then((count) => {
-  console.log(`Found ${count} notes in the vault.`);
-});
+let count = await countNotesInVault(vaultPath);
+console.log(`Found ${count} notes in the vault.`);
