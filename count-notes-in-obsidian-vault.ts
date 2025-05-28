@@ -4,23 +4,25 @@
 import { walk } from "https://deno.land/std@0.206.0/fs/walk.ts";
 
 async function countNotesInVault(vaultPath: string): Promise<number> {
-  let count = 0;
+	let count = 0;
 
-  for await (const entry of walk(vaultPath)) {
-    if (entry.path.endsWith(".md")) {
-      count++;
-    }
-  }
+	for await (const entry of walk(vaultPath)) {
+		if (entry.path.endsWith(".md")) {
+			count++;
+		}
+	}
 
-  return count;
+	return count;
 }
 
 const vaultPath = Deno.args[0];
 
 if (!vaultPath) {
-  console.error("Please provide the path to your Obsidian vault as an argument.");
-  Deno.exit(1);
+	console.error(
+		"Please provide the path to your Obsidian vault as an argument.",
+	);
+	Deno.exit(1);
 }
 
-let count = await countNotesInVault(vaultPath);
+const count = await countNotesInVault(vaultPath);
 console.log(`Found ${count} notes in the vault.`);
